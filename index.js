@@ -83,6 +83,12 @@ app.post('/admin/login', async (req, res) => {
     }
 });
 
+app.get("/admin/me", authenticateJwt, async (req, res) => {
+    const username = req.user.username
+    res.json({ username })
+
+})
+
 app.post('/admin/courses', authenticateJwt, async (req, res) => {
     const course = new Course(req.body);
     await course.save();
